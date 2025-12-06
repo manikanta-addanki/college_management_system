@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students - College Management</title>
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Page background */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    background: radial-gradient(circle at top left, #4f46e5 0%, #1f2937 40%, #020617 100%);
+    color: #0f172a;
+    padding: 20px 0;
+}
+
+/* Main container */
+.container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 32px 28px;
+}
+
+/* Header with Add button */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+    background: rgba(15, 23, 42, 0.75);
+    border-radius: 20px;
+    padding: 24px 28px;
+    box-shadow:
+        0 20px 50px rgba(15, 23, 42, 0.85),
+        0 0 0 1px rgba(148, 163, 184, 0.25);
+    backdrop-filter: blur(20px);
+}
+
+.header h1 {
+    color: #fb7185;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-shadow: 0 4px 16px rgba(251, 113, 133, 0.3);
+}
+
+/* Button base styles */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 24px;
+    border: none;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    backdrop-filter: blur(12px);
+}
+
+/* Primary button (red for students) */
+.btn-primary {
+    background: linear-gradient(135deg, rgba(251, 113, 133, 0.9), rgba(239, 68, 68, 0.9));
+    color: #f9fafb;
+    box-shadow:
+        0 12px 30px rgba(251, 113, 133, 0.4),
+        0 0 0 1px rgba(251, 113, 133, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow:
+        0 18px 40px rgba(251, 113, 133, 0.5),
+        0 0 0 1px rgba(251, 113, 133, 0.6);
+    background: linear-gradient(135deg, rgba(251, 113, 133, 1), rgba(239, 68, 68, 1));
+}
+
+/* Warning button (orange) */
+.btn-warning {
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.9), rgba(245, 158, 11, 0.9));
+    color: #1f2937;
+    box-shadow:
+        0 12px 30px rgba(251, 191, 36, 0.4),
+        0 0 0 1px rgba(251, 191, 36, 0.3);
+}
+
+.btn-warning:hover {
+    transform: translateY(-3px);
+    box-shadow:
+        0 18px 40px rgba(251, 191, 36, 0.5),
+        0 0 0 1px rgba(251, 191, 36, 0.6);
+}
+
+/* Danger button (red) */
+.btn-danger {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.9), rgba(220, 38, 38, 0.9));
+    color: #f9fafb;
+    box-shadow:
+        0 12px 30px rgba(239, 68, 68, 0.4),
+        0 0 0 1px rgba(239, 68, 68, 0.3);
+}
+
+.btn-danger:hover {
+    transform: translateY(-3px);
+    box-shadow:
+        0 18px 40px rgba(239, 68, 68, 0.5),
+        0 0 0 1px rgba(239, 68, 68, 0.6);
+}
+
+/* Small buttons */
+.btn-small {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+}
+
+/* Table container */
+.table-container {
+    background: rgba(15, 23, 42, 0.85);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow:
+        0 24px 60px rgba(15, 23, 42, 0.9),
+        0 0 0 1px rgba(148, 163, 184, 0.2);
+    backdrop-filter: blur(22px);
+    margin-bottom: 32px;
+}
+
+/* Table styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(30, 41, 59, 0.6);
+}
+
+th {
+    background: linear-gradient(135deg, rgba(251, 113, 133, 0.95), rgba(239, 68, 68, 0.95));
+    color: #f9fafb;
+    padding: 20px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+td {
+    padding: 20px;
+    color: #e5e7eb;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+    font-size: 0.95rem;
+}
+
+tr {
+    transition: all 0.2s ease;
+}
+
+tr:hover {
+    background: rgba(51, 65, 85, 0.8);
+    transform: scale(1.01);
+}
+
+/* Actions column */
+.actions {
+    white-space: nowrap;
+}
+
+/* Bottom back button */
+.container > div:last-child {
+    text-align: center;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px 16px;
+    }
+    
+    .header {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+        padding: 20px 24px;
+    }
+    
+    .header h1 {
+        font-size: 1.6rem;
+    }
+    
+    table {
+        font-size: 0.9rem;
+    }
+    
+    th, td {
+        padding: 14px 12px;
+    }
+    
+    .btn-small {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+}
+
+/* Empty state styling */
+td[colspan="6"] {
+    text-align: center !important;
+    padding: 60px 20px !important;
+    color: #94a3b8 !important;
+    font-size: 1.1rem;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎓 Students</h1>
+            <a href="{% url 'student_create' %}" class="btn btn-primary">+ Add Student</a>
+        </div>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Department</th>
+                        <th>Year</th>
+                        <th>Class Advisor</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student in students %}
+                    <tr>
+                        <td><strong>{{ student.name }}</strong></td>
+                        <td>{{ student.email }}</td>
+                        <td>{{ student.department.name }}</td>
+                        <td>{{ student.year }}</td>
+                        <td>{{ student.class_advisor.name|default:"–" }}</td>
+                        <td class="actions">
+                            <a href="{% url 'student_update' student.id %}" class="btn btn-small btn-warning">Edit</a>
+                            <a href="{% url 'student_delete' student.id %}" class="btn btn-small btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="6" style="text-align: center; padding: 40px; color: #666;">No students found.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="{% url 'dashboard' %}" class="btn btn-primary">← Back to Dashboard</a>
+        </div>
+    </div>
+</body>
+</html>
